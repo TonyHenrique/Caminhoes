@@ -1,0 +1,96 @@
+﻿@page "/admin/Caminhao/EditarCaminhao"
+@inject NavigationManager NavigationManager
+@if (Loaded == false)
+{
+    <Loading />
+}
+else
+{
+    <h3 title="@Caminhao.Id">Editar Caminhão</h3>
+    <input name="CaminhaoID" type="hidden" @bind-value="@Caminhao.Id" />
+    <div style="display:grid; grid-template-columns:150px auto;">
+        <label>Modelo:</label>
+        <select id="Modelo" @bind="Caminhao.Modelo">
+            <option value=""></option>
+            <option value="FH">FH</option>
+            <option value="FM">FM</option>
+        </select>
+
+        <label>Ano de Fabricação:</label>
+        <input id="AnoFabricacao" type="number" class="form-control" @bind-value="Caminhao.AnoFabricacao" />
+
+        <label>Ano do Modelo:</label>
+        <input id="AnoModelo" type="number" class="form-control" @bind-value="Caminhao.AnoModelo" />
+
+        <label>Observações:</label>
+        <input id="Observacoes" type="text" class="form-control" @bind-value="Caminhao.Observacoes" maxlength="250" />
+    </div>
+
+    <br />
+    <input id="ButtonSalvar" type="button" class="btn btn-primary" @onclick="Salvar" value="💾 Salvar" />
+    <br />
+
+    @if (!string.IsNullOrEmpty(MensagemValidacao))
+    {
+        <span id="MensagemValidacao" style="color:red;">@MensagemValidacao</span>
+    }
+
+    <br>
+    <div style="width:400px;max-width:100%;">
+        <FotoCaminhao Modelo="@Caminhao.Modelo" />
+    </div>
+    <br>
+}
+
+@code
+{
+    public bool Loaded { get; set; } = false;
+
+    public Guid CaminhaoID { get; set; }
+    public Caminhao Caminhao { get; set; }
+
+    public string MensagemValidacao { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            CaminhaoID = Guid.Parse(NavigationManager.GetQueryValue("CaminhaoID"));
+
+            if (CaminhaoID != Guid.Empty)
+            {
+                this.Caminhao = await Operacoes.Busca(CaminhaoID);
+            }
+            else
+            {
+                this.Caminhao = new Caminhao()
+                {
+                    Id = Guid.Empty
+                };
+            }
+
+            this.Loaded = true;
+            this.StateHasChanged();
+        }
+    }
+
+    public async Task Salvar()
+    {
+        try
+        {
+            var valido = this.Caminhao.ValidaCaminhao();
+
+            MensagemValidacao = "";
+        }
+        catch (Exception ex)
+        {
+            MensagemValidacao = ex.Message;
+            return;
+        }
+
+        await Operacoes.Salva(this.Caminhao);
+
+        NavigationManager.NavigateTo(@$"/admin/Caminhao/");
+    }
+
+}

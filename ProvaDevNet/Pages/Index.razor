@@ -1,0 +1,51 @@
+﻿@page "/"
+@if (Loaded == false)
+{
+    <Loading />
+}
+else
+{
+    <h1>Caminhões</h1>
+
+    <div style="display:flex; flex-wrap: wrap;">
+        @foreach (var Caminhao in Caminhoes)
+        {
+            <div>
+                <span style="font-size:large;">@Caminhao.Modelo</span>
+                <span style="font-size:medium;">@Caminhao.AnoFabricacao</span>
+                <span>/</span>
+                <span style="font-size:medium;">@Caminhao.AnoModelo</span>
+                <br />
+                <div style="width:320px;max-width:100%;">
+                    <FotoCaminhao Modelo="@Caminhao.Modelo" />
+                    <br />
+                    <small>@Caminhao.Observacoes</small>
+                </div>
+            </div>
+        }
+        @if (Caminhoes.Count == 0)
+        {
+            <span style="color:red;">Nenhum caminhão foi cadastrado.</span>
+        }
+    </div>
+}
+@code
+{
+    public bool Loaded { get; set; } = false;
+
+    public List<Caminhao> Caminhoes { get; set; }
+
+    public string MensagemValidacao { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.Caminhoes = await Operacoes.Lista();
+
+            this.Loaded = true;
+            this.StateHasChanged();
+        }
+    }
+
+}

@@ -1,0 +1,85 @@
+﻿@page "/admin/Caminhao/"
+@inject NavigationManager NavigationManager
+@if (Loaded == false)
+{
+    <Loading />
+}
+else
+{
+    <h3>Caminhões</h3>
+    <br />
+    <input id="ButtonNovoCaminhao" type="button" class="btn btn-primary" value="Novo Caminhão" @onclick="NovoCaminhao" />
+    <br />
+    <br />
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Ano Fabricação</th>
+                <th scope="col">Ano Modelo</th>
+                <th scope="col">📸@*🚛*@</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Caminhao in Caminhoes)
+            {
+                <tr>
+                    <td>
+                        <input class="btn btn-outline-primary" type="button" value="Editar" @onclick="async(e)=>{ await Editar(Caminhao); }" />
+                        <input class="btn btn-outline-secondary" type="button" value="🗑️" @onclick="async(e)=>{ await Apagar(Caminhao); }" />
+                    </td>
+                    <td>@Caminhao.Modelo</td>
+                    <td>@Caminhao.AnoFabricacao</td>
+                    <td>@Caminhao.AnoModelo</td>
+                    <td>
+                        <div style="width:100px;max-width:100%;">
+                            <FotoCaminhao Modelo="@Caminhao.Modelo" />
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code
+{
+    public bool Loaded { get; set; } = false;
+
+    public List<Caminhao> Caminhoes { get; set; }
+
+    public string MensagemValidacao { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.Caminhoes = await Operacoes.Lista();   // new List<Caminhao>();
+            //Caminhoes.Add(new Caminhao() { Modelo = "FH" });
+
+            this.Loaded = true;
+            this.StateHasChanged();
+        }
+    }
+
+    public async Task NovoCaminhao()
+    {
+        NavigationManager.NavigateTo(@$"/admin/Caminhao/EditarCaminhao?CaminhaoID={Guid.Empty}");
+    }
+
+    public async Task Editar(Caminhao Caminhao)
+    {
+        NavigationManager.NavigateTo(@$"/admin/Caminhao/EditarCaminhao?CaminhaoID={Caminhao.Id}");
+    }
+
+    public async Task Apagar(Caminhao Caminhao)
+    {
+        // Remove da Tela
+        Caminhoes.Remove(Caminhao);
+
+        // Apaga do Banco de Dados
+        await Operacoes.Apaga(Caminhao);
+    }
+
+}

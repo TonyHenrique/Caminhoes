@@ -1,0 +1,10 @@
+﻿@if (!string.IsNullOrEmpty(Modelo))
+{
+    var ImagemCaminhao = Modelo + ".jpg";
+    <img src="/images/@ImagemCaminhao" style="width:100%;height:100%;"  />
+}
+
+@code {
+    [Parameter]
+    public string Modelo{ get; set; }
+}
