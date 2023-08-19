@@ -9,7 +9,7 @@ namespace Domain.CQRS
 {
     public class ApagaCaminhaoRequest : IRequest<ApagaCaminhaoResponse>
     {
-        Guid CaminhaoID { get; set; }
+        public Guid CaminhaoID { get; set; }
     }
 
     public class ApagaCaminhaoResponse

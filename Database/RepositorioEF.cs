@@ -45,7 +45,7 @@ namespace TonyWebApplication
         {
             using (var context = new DatabaseContext())
             {
-                if (Caminhao.Id == Guid.Empty)
+                if (Caminhao.Id == Guid.Empty || context.Caminhoes.Any(c => c.Id == Caminhao.Id) == false)
                 {
                     context.Caminhoes.Add(Caminhao);
                     await context.SaveChangesAsync();
@@ -54,7 +54,6 @@ namespace TonyWebApplication
                 {
                     context.Update(Caminhao);
                     await context.SaveChangesAsync();
-
                 }
             }
         }

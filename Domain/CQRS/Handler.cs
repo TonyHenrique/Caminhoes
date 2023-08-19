@@ -11,13 +11,12 @@ namespace Domain.CQRS
     public class CreateCaminhaoHandler : IRequestHandler<CreateCaminhaoRequest, CreateCaminhaoResponse>
     {
         IRepositorio _repositorio;
-
         public CreateCaminhaoHandler(IRepositorio repositorio)
         {
             _repositorio = repositorio;
         }
 
-        public Task<CreateCaminhaoResponse> Handle(CreateCaminhaoRequest request, CancellationToken cancellationToken)
+        public async Task<CreateCaminhaoResponse> Handle(CreateCaminhaoRequest request, CancellationToken cancellationToken)
         {
             var response = new CreateCaminhaoResponse()
             {
@@ -25,31 +24,45 @@ namespace Domain.CQRS
                 Observacoes = "Novo Caminhão"
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 
     public class AtualizaCaminhaoHandler : IRequestHandler<AtualizaCaminhaoRequest, AtualizaCaminhaoResponse>
     {
-        public Task<AtualizaCaminhaoResponse> Handle(AtualizaCaminhaoRequest request, CancellationToken cancellationToken)
+        IRepositorio _repositorio;
+        public AtualizaCaminhaoHandler(IRepositorio repositorio)
         {
+            _repositorio = repositorio;
+        }
+        public async Task<AtualizaCaminhaoResponse> Handle(AtualizaCaminhaoRequest request, CancellationToken cancellationToken)
+        {
+            await _repositorio.Salva(request);
+
             var response = new AtualizaCaminhaoResponse()
             {
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 
     public class ApagaCaminhaoHandler : IRequestHandler<ApagaCaminhaoRequest, ApagaCaminhaoResponse>
     {
-        public Task<ApagaCaminhaoResponse> Handle(ApagaCaminhaoRequest request, CancellationToken cancellationToken)
+        IRepositorio _repositorio;
+        public ApagaCaminhaoHandler(IRepositorio repositorio)
         {
+            _repositorio = repositorio;
+        }
+        public async Task<ApagaCaminhaoResponse> Handle(ApagaCaminhaoRequest request, CancellationToken cancellationToken)
+        {
+            await _repositorio.ApagaPorId(request.CaminhaoID);
+
             var response = new ApagaCaminhaoResponse()
             {
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
