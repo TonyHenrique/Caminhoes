@@ -40,6 +40,7 @@ namespace TonyWebApplication
             services.AddRazorPages();
             services.AddServerSideBlazor();
             //services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IRepositorio>(new RepositorioEF() { });
 
             services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
         }

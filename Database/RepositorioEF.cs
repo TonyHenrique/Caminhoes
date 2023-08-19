@@ -11,9 +11,9 @@ namespace TonyWebApplication
     /// <summary>
     /// Repositório usando Entity Framework
     /// </summary>
-    public static class RepositorioEF
+    public class RepositorioEF : IRepositorio
     {
-        public static async Task<List<Caminhao>> Lista()
+        public async Task<List<Caminhao>> Lista()
         {
             using (var db = new DatabaseContext())
             {
@@ -28,7 +28,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task<Caminhao> Busca(Guid CaminhaoID)
+        public async Task<Caminhao> Busca(Guid CaminhaoID)
         {
             using (var db = new DatabaseContext())
             {
@@ -41,7 +41,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task Salva(Caminhao Caminhao)
+        public async Task Salva(Caminhao Caminhao)
         {
             using (var context = new DatabaseContext())
             {
@@ -58,7 +58,7 @@ namespace TonyWebApplication
                 }
             }
         }
-        public static async Task ApagaPorId(Guid CaminhaoID)
+        public async Task ApagaPorId(Guid CaminhaoID)
         {
             using (var context = new DatabaseContext())
             {
@@ -69,7 +69,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task Apaga(Caminhao Caminhao)
+        public async Task Apaga(Caminhao Caminhao)
         {
             using (var context = new DatabaseContext())
             {

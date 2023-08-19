@@ -1,8 +1,22 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using TonyWebApplication;
+using static System.Net.Mime.MediaTypeNames;
 
+/*
 // Tony - Minimal API
+Teste Prático 
+
+Conhecimentos necessários: 
+o	C# Rest Web Api com padrões de projeto
+o	Utilização do Entity Framework
+o	Utilização do ASP.NET Core para criação de Web Api com Swagger
+o	Utilização do padrão de projeto Repository
+o	Utilização do padrão de projeto Dependency Injection
+o	Utilização do padrão de projeto Inversion of Control
+o	Utilização do padrão de projeto CQRS
+o	Utilização do padrão DDD
+*/
 
 #region Builder
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +25,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IRepositorio>(new RepositorioEF() { });
 
 var app = builder.Build();
 #endregion
@@ -28,24 +43,24 @@ app.UseHttpsRedirection();
 
 #region Endpoints
 
-app.MapGet("/Lista", () =>
+app.MapGet("/Lista", (RepositorioEF repositorio) =>
 {
-    return RepositorioEF.Lista();
+    return repositorio.Lista();
 });
 
-app.MapGet("/Busca", (Guid CaminhaoID) =>
+app.MapGet("/Busca", (Guid CaminhaoID, RepositorioEF repositorio) =>
 {
-    return RepositorioEF.Busca(CaminhaoID);
+    return repositorio.Busca(CaminhaoID);
 });
 
-app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao) =>
+app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao, RepositorioEF repositorio) =>
 {
-    await RepositorioEF.Salva(Caminhao);
+    await repositorio.Salva(Caminhao);
 });
 
-app.MapDelete("/Apaga", async (Guid CaminhaoID) =>
+app.MapDelete("/Apaga", async (Guid CaminhaoID, RepositorioEF repositorio) =>
 {
-    await RepositorioEF.ApagaPorId(CaminhaoID);
+    await repositorio.ApagaPorId(CaminhaoID);
 });
 
 #endregion

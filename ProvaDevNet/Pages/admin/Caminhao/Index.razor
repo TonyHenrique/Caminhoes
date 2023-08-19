@@ -46,6 +46,9 @@ else
 }
 @code
 {
+    [Inject]
+    IRepositorio Repositorio { get; set; }
+
     public bool Loaded { get; set; } = false;
 
     public List<Caminhao> Caminhoes { get; set; }
@@ -56,7 +59,7 @@ else
     {
         if (firstRender)
         {
-            this.Caminhoes = await RepositorioEF.Lista();
+            this.Caminhoes = await Repositorio.Lista();
 
             this.Loaded = true;
             this.StateHasChanged();
@@ -86,7 +89,7 @@ else
             Caminhoes.Remove(Caminhao);
 
             // Apaga do Banco de Dados
-            await RepositorioEF.Apaga(Caminhao);
+            await Repositorio.Apaga(Caminhao);
         }
     }
 

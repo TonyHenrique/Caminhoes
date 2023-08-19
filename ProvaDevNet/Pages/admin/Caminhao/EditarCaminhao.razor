@@ -44,6 +44,9 @@ else
 
 @code
 {
+    [Inject]
+    IRepositorio Repositorio { get; set; }
+
     public bool Loaded { get; set; } = false;
 
     public Guid CaminhaoID { get; set; }
@@ -59,7 +62,7 @@ else
 
             if (CaminhaoID != Guid.Empty)
             {
-                this.Caminhao = await RepositorioEF.Busca(CaminhaoID);
+                this.Caminhao = await Repositorio.Busca(CaminhaoID);
             }
             else
             {
@@ -88,7 +91,7 @@ else
             return;
         }
 
-        await RepositorioEF.Salva(this.Caminhao);
+        await Repositorio.Salva(this.Caminhao);
 
         NavigationManager.NavigateTo(@$"/admin/Caminhao/");
     }

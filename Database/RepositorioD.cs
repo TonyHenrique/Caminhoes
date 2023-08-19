@@ -11,9 +11,9 @@ namespace TonyWebApplication
     /// <summary>
     /// Repositório usando Dapper
     /// </summary>
-    public static class RepositorioD
+    public class RepositorioD : IRepositorio
     {
-        public static async Task<List<Caminhao>> Lista()
+        public async Task<List<Caminhao>> Lista()
         {
             using (var db = new DatabaseContext())
             {
@@ -24,7 +24,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task<Caminhao> Busca(Guid CaminhaoID)
+        public async Task<Caminhao> Busca(Guid CaminhaoID)
         {
             using (var db = new DatabaseContext())
             {
@@ -36,7 +36,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task Salva(Caminhao Caminhao)
+        public async Task Salva(Caminhao Caminhao)
         {
             using (var db = new DatabaseContext())
             {
@@ -88,7 +88,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task ApagaPorId(Guid CaminhaoID)
+        public async Task ApagaPorId(Guid CaminhaoID)
         {
             using (var db = new DatabaseContext())
             {
@@ -109,7 +109,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task Apaga(Caminhao Caminhao)
+        public async Task Apaga(Caminhao Caminhao)
         {
             await ApagaPorId(Caminhao.Id);
         }
