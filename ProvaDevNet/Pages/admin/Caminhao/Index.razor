@@ -1,5 +1,6 @@
 ﻿@page "/admin/Caminhao/"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime IJSRuntime
 @if (Loaded == false)
 {
     <Loading />
@@ -12,7 +13,7 @@ else
     <br />
     <br />
     <table class="table table-hover">
-        <thead class="thead-dark">
+        <thead class="thead" xstyle="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);">
             <tr>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">Modelo</th>
@@ -33,7 +34,7 @@ else
                     <td>@Caminhao.AnoFabricacao</td>
                     <td>@Caminhao.AnoModelo</td>
                     <td>
-                        <div style="width:100px;max-width:100%;">
+                        <div style="width:100px;max-width:100%;" title="@Caminhao.Observacoes">
                             <FotoCaminhao Modelo="@Caminhao.Modelo" />
                         </div>
                     </td>
@@ -78,13 +79,15 @@ else
 
     public async Task Apagar(Caminhao Caminhao)
     {
-        await Task.CompletedTask;
+        var confirma = await IJSRuntime.InvokeAsync<bool>("confirm", "Confirma apagar?");
+        if (confirma)
+        {
+            // Remove da Tela
+            Caminhoes.Remove(Caminhao);
 
-        // Remove da Tela
-        Caminhoes.Remove(Caminhao);
-
-        // Apaga do Banco de Dados
-        await RepositorioEF.Apaga(Caminhao);
+            // Apaga do Banco de Dados
+            await RepositorioEF.Apaga(Caminhao);
+        }
     }
 
 }

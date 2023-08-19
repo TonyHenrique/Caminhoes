@@ -38,6 +38,19 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+        Blazor.start({
+            reconnectionHandler: {
+                onConnectionDown: (options, error) => { console.error(error); document.location.reload(); },
+                onConnectionUp: () => { console.log("Connection Up!"); }
+            }
+        });
+                        /*
+        Blazor.defaultReconnectionHandler._reconnectCallback = function (d) {
+        document.location.reload();
+        }
+        */
+    </script>
 </body>
 </html>

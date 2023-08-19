@@ -20,11 +20,15 @@ namespace TonyWebApplication
         {
             Configuration = configuration;
 
-            using (var context = new DatabaseContext())
+            try
             {
-                context.Database.EnsureCreated();
-                context.Database.Migrate();
+                using (var context = new DatabaseContext())
+                {
+                    context.Database.EnsureCreated();
+                    context.Database.Migrate();
+                }
             }
+            catch (Exception ex) { }
         }
 
         public IConfiguration Configuration { get; }
