@@ -59,7 +59,7 @@ else
 
             if (CaminhaoID != Guid.Empty)
             {
-                this.Caminhao = await Repositorio.Busca(CaminhaoID);
+                this.Caminhao = await RepositorioEF.Busca(CaminhaoID);
             }
             else
             {
@@ -88,7 +88,7 @@ else
             return;
         }
 
-        await Repositorio.Salva(this.Caminhao);
+        await RepositorioEF.Salva(this.Caminhao);
 
         NavigationManager.NavigateTo(@$"/admin/Caminhao/");
     }

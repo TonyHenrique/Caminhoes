@@ -4,10 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Entidades;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace TonyWebApplication
 {
-    public static class Repositorio
+    /// <summary>
+    /// Repositório usando Entity Framework
+    /// </summary>
+    public static class RepositorioEF
     {
         public static async Task<List<Caminhao>> Lista()
         {
