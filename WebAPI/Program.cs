@@ -30,22 +30,22 @@ app.UseHttpsRedirection();
 
 app.MapGet("/Lista", () =>
 {
-    return RepositorioD.Lista();
+    return RepositorioEF.Lista();
 });
 
 app.MapGet("/Busca", (Guid CaminhaoID) =>
 {
-    return RepositorioD.Busca(CaminhaoID);
+    return RepositorioEF.Busca(CaminhaoID);
 });
 
 app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao) =>
 {
-    await RepositorioD.Salva(Caminhao);
+    await RepositorioEF.Salva(Caminhao);
 });
 
-app.MapDelete("/Apaga", async ([FromBody] Caminhao Caminhao) =>
+app.MapDelete("/Apaga", async (Guid CaminhaoID) =>
 {
-    await RepositorioD.Apaga(Caminhao);
+    await RepositorioEF.ApagaPorId(CaminhaoID);
 });
 
 #endregion

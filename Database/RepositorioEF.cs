@@ -58,6 +58,16 @@ namespace TonyWebApplication
                 }
             }
         }
+        public static async Task ApagaPorId(Guid CaminhaoID)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var caminhao = context.Find<Caminhao>(CaminhaoID);
+                context.Remove(caminhao);
+
+                await context.SaveChangesAsync();
+            }
+        }
 
         public static async Task Apaga(Caminhao Caminhao)
         {

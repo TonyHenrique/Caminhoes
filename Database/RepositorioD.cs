@@ -88,7 +88,7 @@ namespace TonyWebApplication
             }
         }
 
-        public static async Task Apaga(Caminhao Caminhao)
+        public static async Task ApagaPorId(Guid CaminhaoID)
         {
             using (var db = new DatabaseContext())
             {
@@ -103,11 +103,15 @@ namespace TonyWebApplication
                         ",
                         new
                         {
-                            Caminhao.Id
+                            CaminhaoID
                         }
                 );
             }
+        }
 
+        public static async Task Apaga(Caminhao Caminhao)
+        {
+            await ApagaPorId(Caminhao.Id);
         }
     }
 
