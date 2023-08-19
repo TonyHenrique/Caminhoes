@@ -5,19 +5,20 @@ using System.Threading.Tasks;
 using Entidades;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProvaDevNet
+namespace TonyWebApplication
 {
-    public static class Operacoes
+    public static class Repositorio
     {
         public static async Task<List<Caminhao>> Lista()
         {
             using (var db = new DatabaseContext())
             {
-                var Caminhoes = await db.Caminhoes
-                    .OrderBy(b => b.AnoFabricacao)
-                    .ThenBy(b => b.AnoModelo)
-                    .ThenBy(b => b.Modelo)
-                    .ToListAsync();
+                var Caminhoes = await
+                                    db.Caminhoes
+                                        .OrderBy(b => b.AnoFabricacao)
+                                        .ThenBy(b => b.AnoModelo)
+                                        .ThenBy(b => b.Modelo)
+                                        .ToListAsync();
 
                 return Caminhoes;
             }
@@ -27,9 +28,10 @@ namespace ProvaDevNet
         {
             using (var db = new DatabaseContext())
             {
-                var Caminhao = await db.Caminhoes
-                    .Where(b => b.Id == CaminhaoID)
-                    .FirstOrDefaultAsync();
+                var Caminhao = await
+                                    db.Caminhoes
+                                        .Where(b => b.Id == CaminhaoID)
+                                        .FirstOrDefaultAsync();
 
                 return Caminhao;
             }
@@ -53,13 +55,6 @@ namespace ProvaDevNet
             }
         }
 
-        //public static async Task Atualiza(Caminhao Caminhao)
-        //{
-        //    using (var context = new DatabaseContext())
-        //    {
-        //    }
-        //}
-
         public static async Task Apaga(Caminhao Caminhao)
         {
             using (var context = new DatabaseContext())
@@ -69,7 +64,6 @@ namespace ProvaDevNet
                 await context.SaveChangesAsync();
             }
         }
-
 
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace ProvaDevNet.Data
+namespace TonyWebApplication.Data
 {
     public class WeatherForecast
     {

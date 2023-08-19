@@ -41,7 +41,7 @@ else
     {
         if (firstRender)
         {
-            this.Caminhoes = await Operacoes.Lista();
+            this.Caminhoes = await Repositorio.Lista();
 
             this.Loaded = true;
             this.StateHasChanged();

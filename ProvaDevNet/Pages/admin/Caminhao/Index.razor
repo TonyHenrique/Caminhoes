@@ -55,8 +55,7 @@ else
     {
         if (firstRender)
         {
-            this.Caminhoes = await Operacoes.Lista();   // new List<Caminhao>();
-            //Caminhoes.Add(new Caminhao() { Modelo = "FH" });
+            this.Caminhoes = await Repositorio.Lista();
 
             this.Loaded = true;
             this.StateHasChanged();
@@ -65,21 +64,27 @@ else
 
     public async Task NovoCaminhao()
     {
+        await Task.CompletedTask;
+
         NavigationManager.NavigateTo(@$"/admin/Caminhao/EditarCaminhao?CaminhaoID={Guid.Empty}");
     }
 
     public async Task Editar(Caminhao Caminhao)
     {
+        await Task.CompletedTask;
+
         NavigationManager.NavigateTo(@$"/admin/Caminhao/EditarCaminhao?CaminhaoID={Caminhao.Id}");
     }
 
     public async Task Apagar(Caminhao Caminhao)
     {
+        await Task.CompletedTask;
+
         // Remove da Tela
         Caminhoes.Remove(Caminhao);
 
         // Apaga do Banco de Dados
-        await Operacoes.Apaga(Caminhao);
+        await Repositorio.Apaga(Caminhao);
     }
 
 }

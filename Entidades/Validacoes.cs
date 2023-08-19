@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Entidades;
 
-namespace ProvaDevNet
+namespace TonyWebApplication
 {
     public static class Validacoes
     {

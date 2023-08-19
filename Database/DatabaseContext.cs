@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Entidades;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProvaDevNet
+namespace TonyWebApplication
 {
     public class DatabaseContext : DbContext
     {

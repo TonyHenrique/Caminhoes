@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31320.298
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProvaDevNet", "ProvaDevNet\ProvaDevNet.csproj", "{8CCC65A9-DAB5-4DBC-AF5A-5D437C50526B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonyWebApplication", "ProvaDevNet\TonyWebApplication.csproj", "{8CCC65A9-DAB5-4DBC-AF5A-5D437C50526B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entidades\Entities.csproj", "{4BFB4FFB-A111-44E1-B23A-DB7760CEF1E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{9DF90B44-51EB-4553-834A-033CE1F95A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{7AD4C577-6987-442C-B364-6D9A62371F6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{7AD4C577-6987-442C-B364-6D9A62371F6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

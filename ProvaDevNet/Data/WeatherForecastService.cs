@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProvaDevNet.Data
+namespace TonyWebApplication.Data
 {
     public class WeatherForecastService
     {

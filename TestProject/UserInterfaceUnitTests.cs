@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using System.Threading.Tasks;
 using System;
 using OpenQA.Selenium.Support.UI;
-using ProvaDevNet;
+using TonyWebApplication;
 using OpenQA.Selenium.Support.Extensions;
 
 namespace UserInterfaceUnitTests
@@ -34,11 +34,11 @@ namespace UserInterfaceUnitTests
         {
             driver.Navigate().GoToUrl($"{WebSite}/admin/Caminhao/");
 
-            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(ExpectedConditions.ElementExists(By.Id("ButtonNovoCaminhao")));
+            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(w => w.FindElement(By.Id("ButtonNovoCaminhao")));
 
             driver.FindElement(By.Id("ButtonNovoCaminhao")).Click();
 
-            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(ExpectedConditions.ElementExists(By.Id("Modelo")));
+            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(w => w.FindElement(By.Id("Modelo")));
 
             var CaminhaoID = Guid.Parse(driver.FindElement(By.Name("CaminhaoID")).GetAttribute("value"));
 
@@ -51,7 +51,7 @@ namespace UserInterfaceUnitTests
             driver.FindElement(By.Id("ButtonSalvar")).Click();
 
             // Estando tudo certo, vai voltar a tela da listagem com o Botão Novo Caminhão...
-            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(ExpectedConditions.ElementExists(By.Id("ButtonNovoCaminhao")));
+            new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(e => e.FindElement(By.Id("ButtonNovoCaminhao")));
 
             //// TODO: Verifica se os dados gravados ficaram corretos... no Banco de Dados. Como usei o Sqlite omiti por simplicidade.
             //var Caminhao = await Operacoes.Busca(CaminhaoID);
@@ -60,7 +60,7 @@ namespace UserInterfaceUnitTests
             //Assert.AreEqual(Caminhao.AnoFabricacao, 2021);
             //Assert.AreEqual(Caminhao.AnoModelo, 2022);
             //Assert.AreEqual(Caminhao.Observacoes, "Teste de novo cadastro");
-            
+
             driver.Close();
         }
 
@@ -155,7 +155,7 @@ namespace UserInterfaceUnitTests
             var AnoSubsequente = AnoAtual + 1;
 
             Assert.AreEqual(MensagemValidacao, $"Ano Modelo (Poderá ser o atual {AnoAtual} ou o ano subsequente {AnoSubsequente})");
-            
+
             driver.Close();
         }
 
