@@ -113,6 +113,16 @@ namespace TonyWebApplication
         {
             await ApagaPorId(Caminhao.Id);
         }
+
+        public Task<Caminhao> Novo()
+        {
+            return Task.FromResult<Caminhao>(
+                new Caminhao()
+                {
+                    Id = Guid.NewGuid(),
+                    Observacoes = "Novo caminhão"
+                });
+        }
     }
 
 }

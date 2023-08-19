@@ -3,14 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TonyWebApplication
+namespace Domain
 {
     public interface IRepositorio
     {
+        Task<Caminhao> Novo();
+        Task Salva(Caminhao Caminhao);
         Task Apaga(Caminhao Caminhao);
         Task ApagaPorId(Guid CaminhaoID);
-        Task<Caminhao> Busca(Guid CaminhaoID);
         Task<List<Caminhao>> Lista();
-        Task Salva(Caminhao Caminhao);
+        Task<Caminhao> Busca(Guid CaminhaoID);
     }
 }

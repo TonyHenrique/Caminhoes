@@ -78,6 +78,14 @@ namespace TonyWebApplication
                 await context.SaveChangesAsync();
             }
         }
-
+        public Task<Caminhao> Novo()
+        {
+            return Task.FromResult<Caminhao>(
+                new Caminhao()
+                {
+                    Id = Guid.NewGuid(),
+                    Observacoes = "Novo caminhão"
+                });
+        }
     }
 }

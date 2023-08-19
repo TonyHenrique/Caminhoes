@@ -1,5 +1,9 @@
 using Domain;
+using Domain.CQRS;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using TonyWebApplication;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -25,7 +29,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IRepositorio>(new RepositorioEF() { });
+builder.Services.AddSingleton<IRepositorio>(new RepositorioD() { });
+
+builder.Services.AddMediatR(c =>
+{
+    c.RegisterServicesFromAssemblyContaining<Program>();
+    c.RegisterServicesFromAssemblyContaining<CreateCaminhaoHandler>();
+});
 
 var app = builder.Build();
 #endregion
@@ -51,6 +61,30 @@ app.MapGet("/Lista", (IRepositorio repositorio) =>
 app.MapGet("/Busca", (Guid CaminhaoID, IRepositorio repositorio) =>
 {
     return repositorio.Busca(CaminhaoID);
+});
+
+// Exemplo simples com CQRS
+app.MapGet("/CQRS/Novo", async (IRepositorio repositorio, [FromServices] IMediator mediator) =>
+{
+    var res = await mediator.Send(new CreateCaminhaoRequest());
+
+    return res;
+});
+
+app.MapPost("/CQRS/Salva", async ([FromBody] AtualizaCaminhaoRequest Caminhao, IRepositorio repositorio, [FromServices] IMediator mediator) =>
+{
+    await mediator.Send(Caminhao);
+});
+
+app.MapDelete("/CQRS/Apaga", async ([FromBody] ApagaCaminhaoRequest Caminhao, IRepositorio repositorio, [FromServices] IMediator mediator) =>
+{
+    await mediator.Send(Caminhao);
+});
+
+// Exemplo com modo "direto"
+app.MapGet("/Novo", async (IRepositorio repositorio) =>
+{
+    return await repositorio.Novo();
 });
 
 app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao, IRepositorio repositorio) =>
