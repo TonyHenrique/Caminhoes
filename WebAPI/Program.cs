@@ -43,22 +43,22 @@ app.UseHttpsRedirection();
 
 #region Endpoints
 
-app.MapGet("/Lista", (RepositorioEF repositorio) =>
+app.MapGet("/Lista", (IRepositorio repositorio) =>
 {
     return repositorio.Lista();
 });
 
-app.MapGet("/Busca", (Guid CaminhaoID, RepositorioEF repositorio) =>
+app.MapGet("/Busca", (Guid CaminhaoID, IRepositorio repositorio) =>
 {
     return repositorio.Busca(CaminhaoID);
 });
 
-app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao, RepositorioEF repositorio) =>
+app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao, IRepositorio repositorio) =>
 {
     await repositorio.Salva(Caminhao);
 });
 
-app.MapDelete("/Apaga", async (Guid CaminhaoID, RepositorioEF repositorio) =>
+app.MapDelete("/Apaga", async (Guid CaminhaoID, IRepositorio repositorio) =>
 {
     await repositorio.ApagaPorId(CaminhaoID);
 });
