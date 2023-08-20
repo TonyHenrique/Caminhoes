@@ -14,18 +14,23 @@ Projeto para demonstração de conhecimentos necessários:
 - Utilização do padrão DDD
 
 **Web API**
+
 ![Swagger - OpenAPI](/Screenshots/WebAPI.png)
 
 **Tela Inicial**
+
 ![Tela Inicial](/Screenshots/TelaInicial.png)
 
 **Tela Administração**
+
 ![Tela Administração](/Screenshots/TelaAdmin.png)
 
 **Editar Caminhão**
+
 ![Editar Caminhão](/Screenshots/EditarCaminhao.png)
 
 **Testes**
+
 ![Testes](/Screenshots/Testes.png)
 
 # More
