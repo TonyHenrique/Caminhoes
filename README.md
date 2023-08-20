@@ -3,7 +3,7 @@
 > Tony - Minimal API
 > Teste Prático 
 
-Conhecimentos necessários: 
+Projeto para demonstração de conhecimentos necessários: 
 - C# Rest Web Api com padrões de projeto
 - Utilização do Entity Framework
 - Utilização do ASP.NET Core para criação de Web Api com Swagger
