@@ -3,7 +3,7 @@
 > Tony - Minimal API
 > Teste Prático 
 
-Projeto para demonstração de conhecimentos necessários: 
+## Projeto para demonstração de conhecimentos necessários: 
 - C# Rest Web API com padrões de projeto
 - Utilização do Entity Framework
 - Utilização do ASP.NET Core para criação de Web Api com Swagger
@@ -13,6 +13,7 @@ Projeto para demonstração de conhecimentos necessários:
 - Utilização do padrão de projeto CQRS
 - Utilização do padrão DDD
 
+## Diagrama arquitetural
 ```mermaid
 graph LR;
 
