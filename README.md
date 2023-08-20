@@ -13,6 +13,13 @@ Projeto para demonstração de conhecimentos necessários:
 - Utilização do padrão de projeto CQRS
 - Utilização do padrão DDD
 
+```mermaid
+graph LR;
+
+ASPNet-->Singleton-IoC-->API-Endpoint-->MediatR-.->CQRS-Handler-->Repository;
+      
+```
+
 **Web API**
 
 .NET Minimal Web API utilizando CQRS, IoC, Repository, Domain: [ver código-fonte](WebAPI/Program.cs)
