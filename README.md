@@ -10,7 +10,7 @@ Nuvem, Arquitetura de Sistemas e Bancos de Dados.
 ### Projeto para demonstração de conhecimentos necessários: 
 - C# REST Web API com padrões de projeto
 - Utilização do Entity Framework
-- Utilização do ASP.NET Core para criação de Web Api com OpenAPI(Swagger)
+- Utilização do ASP.NET Core para criação de Web API com OpenAPI(Swagger)
 - Utilização do padrão de projeto Repository
 - Utilização do padrão de projeto Dependency Injection
 - Utilização do padrão de projeto Inversion of Control
