@@ -32,6 +32,8 @@ namespace UserInterfaceUnitTests
         [DoNotParallelize]
         public async Task NovoCaminhaoDadosValidos()
         {
+            await Task.CompletedTask;
+
             driver.Navigate().GoToUrl($"{WebSite}/admin/Caminhao/");
 
             new WebDriverWait(driver, TimeSpan.FromMinutes(1)).Until(w => w.FindElement(By.Id("ButtonNovoCaminhao")));
