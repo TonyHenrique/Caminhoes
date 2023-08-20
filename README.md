@@ -1,7 +1,12 @@
 # Caminhões / Trucks
 
-> Tony - Minimal API
-> Teste Prático 
+> Tony Henrique
+>
+> Desenvolvimento de Software
+>
+> Nuvem, Arquitetura de Sistemas e Bancos de Dados.
+
+Teste Prático - Web API
 
 ## Projeto para demonstração de conhecimentos necessários: 
 - C# Rest Web API com padrões de projeto
@@ -24,6 +29,7 @@ ASPNet-->Singleton-IoC-->API-Endpoint-->MediatR-.->CQRS-Handler-->Repository;
 **Web API**
 
 .NET Minimal Web API utilizando CQRS, IoC, Repository, Domain: [ver código-fonte](WebAPI/Program.cs)
+
 ![Swagger - OpenAPI](/Screenshots/WebAPI.png)
 
 **Tela Inicial**
