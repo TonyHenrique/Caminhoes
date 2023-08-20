@@ -15,6 +15,7 @@ Projeto para demonstração de conhecimentos necessários:
 
 **Web API**
 
+.NET Minimal Web API, CQRS, IoC, Repository, Domain: [ver código-fonte](WebApi/Program.cs)
 ![Swagger - OpenAPI](/Screenshots/WebAPI.png)
 
 **Tela Inicial**
