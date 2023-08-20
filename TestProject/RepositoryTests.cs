@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestProject
+namespace DataTests
 {
     [TestClass]
-    public class Tests
+    public class RepositoryTests
     {
         [TestMethod]
         //[DoNotParallelize]
