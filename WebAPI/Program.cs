@@ -53,49 +53,66 @@ app.UseHttpsRedirection();
 
 #region Endpoints
 
-app.MapGet("/Lista", (IRepositorio repositorio) =>
+#region // Exemplo com CQRS
+app.MapGet("/CQRS/Lista", async (IRepositorio repositorio, [FromServices] IMediator mediator) =>
 {
-    return repositorio.Lista();
-});
+    var res = await mediator.Send(new ListaCaminhaoRequest());
+    return res;
+}).WithTags("CQRS");
 
-app.MapGet("/Busca", (Guid CaminhaoID, IRepositorio repositorio) =>
+app.MapGet("/CQRS/Busca", async (Guid CaminhaoID, IRepositorio repositorio, [FromServices] IMediator mediator) =>
 {
-    return repositorio.Busca(CaminhaoID);
-});
+    var res = await mediator.Send(new BuscaCaminhaoRequest() { CaminhaoID = CaminhaoID });
+    return res;
+}).WithTags("CQRS");
 
-// Exemplo simples com CQRS
 app.MapGet("/CQRS/Novo", async (IRepositorio repositorio, [FromServices] IMediator mediator) =>
 {
     var res = await mediator.Send(new CreateCaminhaoRequest());
-
     return res;
-});
+}).WithTags("CQRS");
 
-app.MapPost("/CQRS/Salva", async ([FromBody] AtualizaCaminhaoRequest Caminhao, IRepositorio repositorio, [FromServices] IMediator mediator) =>
+app.MapPost("/CQRS/Salva", async ([FromBody] AtualizaCaminhaoRequest request, IRepositorio repositorio, [FromServices] IMediator mediator) =>
 {
-    await mediator.Send(Caminhao);
-});
+    var res = await mediator.Send(request);
+    return res;
+}).WithTags("CQRS");
 
-app.MapDelete("/CQRS/Apaga", async ([FromBody] ApagaCaminhaoRequest Caminhao, IRepositorio repositorio, [FromServices] IMediator mediator) =>
+app.MapDelete("/CQRS/Apaga", async ([FromBody] ApagaCaminhaoRequest request, IRepositorio repositorio, [FromServices] IMediator mediator) =>
 {
-    await mediator.Send(Caminhao);
-});
+    var res = await mediator.Send(request);
+    return res;
+}).WithTags("CQRS");
+#endregion
 
-// Exemplo com modo "direto"
+#region // Exemplo com modo "direto"
+app.MapGet("/Lista", async (IRepositorio repositorio) =>
+{
+    return await repositorio.Lista();
+}).WithTags("Tradicional");
+
+app.MapGet("/Busca", async (Guid CaminhaoID, IRepositorio repositorio) =>
+{
+    return await repositorio.Busca(CaminhaoID);
+}).WithTags("Tradicional");
+
 app.MapGet("/Novo", async (IRepositorio repositorio) =>
 {
-    return await repositorio.Novo();
-});
+    var res = await repositorio.Novo();
+    return res;
+}).WithTags("Tradicional");
 
 app.MapPost("/Salva", async ([FromBody] Caminhao Caminhao, IRepositorio repositorio) =>
 {
     await repositorio.Salva(Caminhao);
-});
+}).WithTags("Tradicional");
 
 app.MapDelete("/Apaga", async (Guid CaminhaoID, IRepositorio repositorio) =>
 {
     await repositorio.ApagaPorId(CaminhaoID);
-});
+}).WithTags("Tradicional");
+
+#endregion
 
 #endregion
 
