@@ -23,7 +23,7 @@ namespace UserInterfaceUnitTests
     public class CadastroUnitTest
     {
         const string WebSite = //"https://localhost:44394"// 👈 Put the Web App url here. Then Start the Project ProvaDevNet without Debugging
-                                "https://volvotruck.azurewebsites.net"
+                                "https://tonyhenriquemeta.azurewebsites.net"
                                 ;
 
         IWebDriver driver = new OpenQA.Selenium.Chrome.ChromeDriver();
