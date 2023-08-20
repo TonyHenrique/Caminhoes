@@ -1,14 +1,13 @@
+## Perfil
+
+### Tony Henrique
+Desenvolvimento de Software:<br />
+Nuvem, Arquitetura de Sistemas e Bancos de Dados.
+
 # Caminhões / Trucks
+## Teste Prático - Web API
 
-> Tony Henrique
->
-> Desenvolvimento de Software
->
-> Nuvem, Arquitetura de Sistemas e Bancos de Dados.
-
-Teste Prático - Web API
-
-## Projeto para demonstração de conhecimentos necessários: 
+### Projeto para demonstração de conhecimentos necessários: 
 - C# Rest Web API com padrões de projeto
 - Utilização do Entity Framework
 - Utilização do ASP.NET Core para criação de Web Api com Swagger
